@@ -1,0 +1,12 @@
+Basqiue :
+TYPE_TEXT.ID_TEXT=CONTENU
+
+TYPE_TEXT = description | choix | condition
+
+Conditionnels :
+description.lorem=lorem ipsum {ID_CONDITION}
+
+condition.lorem.vrai=sit dolor amet
+condition.lorem.faux=
+condition.lorem=if lorem
+variable.lorem=heros.nom=toto
