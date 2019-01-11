@@ -230,7 +230,20 @@
 		],
 		"scene1_dancefloor": [
 			{
-				"next": "scene1_retour"
+				"text": "Avancer",
+				"next": "scene1_avancer"
+			},
+			{
+				"text": "Aller sur la droite",
+				"next": "scene1_droite"
+			},
+			{
+				"text": "Aller sur la gauche",
+				"require": {
+					"name": "mecanisme",
+					"true": "scene1_gauche_mecanisme",
+					"false": "scene1_gauche"
+				}
 			}
 		]
 	}

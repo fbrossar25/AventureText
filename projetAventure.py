@@ -16,6 +16,7 @@ class TextAdventure:
         self.start = start
 
     def load_properties(self) -> Any:
+        # json.decoder.JSONDecodeError
         try:
             with open(self.filename, 'r') as f:
                 ppt = json.load(f)
@@ -49,9 +50,14 @@ class TextAdventure:
             n += 1
         return True
 
+    def handle_define(self, choice: str, n: int):
+        if "define" in self.ppt['choix'][choice][n]:
+            for key, value in self.ppt['choix'][choice][n]["define"].items():
+                self.global_var[key] = value
+
     def get_choice(self, name: str) -> str:
         choice = None 
-        if self.print_choice(name):    
+        if self.print_choice(name):
             while True:
                 print('Quel est votre choix ?')
                 try:
@@ -66,7 +72,9 @@ class TextAdventure:
         else:
             choice = 1
 
+        self.handle_define(name, choice-1)
         return self.next_choice(name, choice-1)
+
 
     def next_choice(self, name: str, n: int) -> str:
         choice = self.ppt['choix'][name][n]
@@ -84,6 +92,7 @@ class TextAdventure:
         choice = self.start
         while True:
             print()
+            print()
             choice = self.get_choice(choice)
 
             if choice == 'victoire':
@@ -91,23 +100,27 @@ class TextAdventure:
                 break
 
     def trigger_win(self):
+        print()
         print(self.ppt['description']['victoire']['text'])
 
 
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        print("No text file for text adventure :'(")
-        print("Please enter a file.")
-        exit(1)
+    try:
+        if len(sys.argv) < 2:
+            print("No text file for text adventure :'(")
+            print("Please enter a file.")
+            exit(1)
 
-    filename = sys.argv[1]
-    start = 'Intro'
+        filename = sys.argv[1]
+        start = 'Intro'
 
-    t = TextAdventure(filename, start)
-    t.load_properties()
-    t.get_global_var()
-    print()
-    #print(t.get_choice(start))
-    t.loop()
+        t = TextAdventure(filename, start)
+        t.load_properties()
+        t.get_global_var()
+        print()
+        #print(t.get_choice(start))
+        t.loop()
+    except KeyboardInterrupt:
+        print('\r\r\nBye ! :)')
