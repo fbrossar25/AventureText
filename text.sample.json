@@ -1,44 +1,52 @@
 {
 	"description": {
-		"foo": {
-			"text": "bonjour"
+		"Intro": {
+			"text": "Vous vous réveillez dans une pièce relativement sombre, les battements de coeurs\nassourdissants résonnent dans vos tympans. A cela s’ajoute un mal de crâne."
 		},
-		"bar": {
-			"text": "foo"
+		"scene1": {
+			"text": "La pièce dans laquelle vous êtes est baignée dans l’obscurité, que faites vous ?"
 		},
-		"win": {
-			"text": "YOU WIN !!! :)"
+		"scene1_avancer": {
+			"text": "Vous vous retrouvez face à une porte en bois, avec des renforts en métaux. une petite grille\nest encastré dans la porte au niveau de votre tête, que faites vous ?"
 		},
-		"end": {
-			"text": "YOU DIED !!! :("
+		"scene1_droite": {
+			"text": "Vous parvenez à deviner un petit placard fixé sur le mur droit de la pièce, que faire ?\n"
+		},
+		"scene1_gauche_mecanisme":{
+			"text": "Vous vous retrouvez face à un mur en pierre, des gouttes d’eau perlent ça et là à cause de\nl’humidité ambiante. Vous observez un détail étrange. Que faire ?",
+		},
+		"scene1_gauche": {
+			"text": "Vous vous retrouvez face à un mur en pierre, des gouttes d’eau perlent ça et là à cause de\nl’humidité ambiante. Que faire ?"
 		}
-	},
 
+	},
 	"choix": {
-		"foo": [
+		"Intro": [
 			{
-				"text": "Aller à la porte gauche.",
-				"next": "porte_1"
-			},
-			{
-				"text": "kill",
-				"next": "end"
+				"text": "[saisir votre nom]",
+				"next": "porte_1",
+				"input": "nomJoueur"
 			}
 		],
-
-
-		"bar": [
+		"scene1": [
 			{
-				"text": "kill !",
-				"next": "end"
+				"text": "Avancer",
+				"next": "scene1_avancer"
 			},
 			{
-				"text": "treasure !",
-				"next": "win"
+				"text": "Aller sur la droite",
+				"next": "scene1_droite"
 			},
 			{
-				"text": "foo",
-				"next": "foo"
+				"text": "Aller sur la gauche",
+				"require": {
+					"name": "mecanisme",
+					"true": "scene1_gauche_mecanisme",
+					"false": "scene1_gauche"
+				}
+			},
+			{
+
 			}
 		]
 	}
