@@ -13,6 +13,7 @@ class TextAdventure:
         self.ppt = self.load_properties()
         self.user_input = {}
         self.global_var = {}
+        self.start = start
 
     def load_properties(self) -> Any:
         try:
@@ -36,7 +37,9 @@ class TextAdventure:
 
         n = 1
         print(self.ppt['description'][name]['text'])
+        print(choices)
         for choice in choices:
+            print(choice)
             print('   {n} - {text}'.format(
                 n=n,
                 text=choice['text'].format(**self.user_input)
@@ -63,6 +66,11 @@ class TextAdventure:
 
         return self.ppt['choix'][name][choice-1]['next']
 
+    def loop(self):
+        choice = self.start
+        while True:
+            choice = self.get_choice(choice)
+
 
 
 
@@ -79,4 +87,5 @@ if __name__ == '__main__':
     t.load_properties()
 
     print()
-    print(t.get_choice(start))
+    #print(t.get_choice(start))
+    t.loop()
