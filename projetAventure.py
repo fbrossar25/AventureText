@@ -12,6 +12,7 @@ class TextAdventure:
         self.filename = filename
         self.ppt = self.load_properties()
         self.user_input = {}
+        self.global_var = {}
 
     def load_properties(self) -> Any:
         try:
@@ -44,12 +45,23 @@ class TextAdventure:
         return True
 
     def get_choice(self, name: str) -> str:
-            choice = 
+        choice = None 
         if self.print_choice(name):    
             while True:
-                print('Quel est votre choix ?')            
+                print('Quel est votre choix ?')
+                try:
+                    choice = int(input(' > '))
+                    if choice <= 0 or choice > len(self.ppt['choix']):
+                        continue
+                    else:
+                        break
+                except ValueError:
+                    pass
 
+        else:
+            choice = 1
 
+        return self.ppt['choix'][name][choice-1]['next']
 
 
 
@@ -67,4 +79,4 @@ if __name__ == '__main__':
     t.load_properties()
 
     print()
-    t.get_choice(start)
+    print(t.get_choice(start))
