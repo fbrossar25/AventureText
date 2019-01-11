@@ -16,6 +16,7 @@ class TextAdventure:
         self.start = start
 
     def load_properties(self) -> Any:
+        # json.decoder.JSONDecodeError
         try:
             with open(self.filename, 'r') as f:
                 ppt = json.load(f)
@@ -49,6 +50,11 @@ class TextAdventure:
             n += 1
         return True
 
+    def handle_define(self, choice: str, n: int):
+        if "define" in self.ppt['choix'][choice][n]:
+            for key, value in self.ppt['choix'][choice][n]["define"].items():
+                self.global_var[key] = value
+
     def get_choice(self, name: str) -> str:
         choice = None 
         if self.print_choice(name):    
@@ -66,7 +72,9 @@ class TextAdventure:
         else:
             choice = 1
 
+        self.handle_define(name, choice-1)
         return self.next_choice(name, choice-1)
+
 
     def next_choice(self, name: str, n: int) -> str:
         choice = self.ppt['choix'][name][n]
