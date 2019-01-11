@@ -46,6 +46,15 @@
 		"scene2_ouvrir": {
 			"text": "Vous tentez d’actionner la poignée, la porte reste immobile, il vous faut une clef."
 		},
+		"easter_1": {
+			"text": "La porte vous regarde"
+		},
+		"easter_2": {
+			"text": "Vous sentez que la porte commence à faiblir"
+		},
+		"easter_3": {
+			"text": "La porte cède et s'ouvre"
+		},
 		"scene2_ouvrir_clef": {
 			"text": "Vous insérez la clef et tentez d’ouvrir la porte. La porte s’ouvre."
 		},
@@ -219,6 +228,36 @@
 			{
 				"text": "Faire demi-tour",
 				"next": "scene1_retour"
+			},
+			{
+				"text": "Regarder la porte",
+				"next": "easter_1"
+			}
+		],
+		"easter_1": [
+			{
+				"text": "Faire demi-tour",
+				"next": "scene1_retour"
+			},
+			{
+				"text": "Regarder la porte",
+				"next": "easter_2"
+			}
+		],
+		"easter_2": [
+			{
+				"text": "Faire demi-tour",
+				"next": "scene1_retour"
+			},
+			{
+				"text": "Regarder la porte",
+				"next": "easter_3"
+			}
+		],
+		"easter_3": [
+			{
+				"text": "S'échapper",
+				"next": "victoire"
 			}
 		],
 		"scene2_ouvrir_clef": [
