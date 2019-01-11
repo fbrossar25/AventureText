@@ -63,7 +63,18 @@
 				"define": {
 					"hello": true
 				},
-				"next": "hello"
+				"next": "hello2"
+			}
+		],
+
+		"hello2": [
+			{
+				"text": "ok",
+				"require": {
+					"name": "a",
+					"true": "hello3",
+					"false": "hello4"
+				}
 			}
 		],
 
