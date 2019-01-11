@@ -115,7 +115,6 @@ if __name__ == '__main__':
         t.load_properties()
         t.get_global_var()
         print()
-        #print(t.get_choice(start))
         t.loop()
     except KeyboardInterrupt:
         print('\r\r\nBye ! :)')
