@@ -71,7 +71,6 @@ class TextAdventure:
     def next_choice(self, name: str, n: int) -> str:
         choice = self.ppt['choix'][name][n]
         if 'require' in choice:
-            print(choice["require"])
             if self.global_var[choice["require"]["name"]]:
                 return choice["require"]["true"]
             else:
@@ -86,6 +85,13 @@ class TextAdventure:
         while True:
             print()
             choice = self.get_choice(choice)
+
+            if choice == 'victoire':
+                self.trigger_win()
+                break
+
+    def trigger_win(self):
+        print(self.ppt['description']['victoire']['text'])
 
 
 
