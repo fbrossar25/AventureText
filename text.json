@@ -55,6 +55,9 @@
 		"easter_3": {
 			"text": "La porte cède et s'ouvre"
 		},
+		"easter_4": {
+			"text": "Malheureusement, vous n'avez pas de hache."
+		},
 		"scene2_ouvrir_clef": {
 			"text": "Vous insérez la clef et tentez d’ouvrir la porte. La porte s’ouvre."
 		},
@@ -122,6 +125,12 @@
 				"text": "Observer par la petite grille",
 				"next": "scene2_grille"
 			},
+			{
+				"text": "Faire demi-tour",
+				"next": "scene1_retour"
+			}
+		],
+		"easter_4": [
 			{
 				"text": "Faire demi-tour",
 				"next": "scene1_retour"
@@ -222,6 +231,10 @@
 			{
 				"text": "Faire demi-tour",
 				"next": "scene1_avancer"
+			},
+			{
+				"text": "Here's {nomJoueur} !",
+				"next": "easter_4"
 			}
 		],
 		"scene2_ouvrir": [
