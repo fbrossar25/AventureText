@@ -57,7 +57,7 @@ class TextAdventure:
 
     def get_choice(self, name: str) -> str:
         choice = None 
-        if self.print_choice(name):    
+        if self.print_choice(name):
             while True:
                 print('Quel est votre choix ?')
                 try:
@@ -92,6 +92,7 @@ class TextAdventure:
         choice = self.start
         while True:
             print()
+            print()
             choice = self.get_choice(choice)
 
             if choice == 'victoire':
@@ -99,23 +100,27 @@ class TextAdventure:
                 break
 
     def trigger_win(self):
+        print()
         print(self.ppt['description']['victoire']['text'])
 
 
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        print("No text file for text adventure :'(")
-        print("Please enter a file.")
-        exit(1)
+    try:
+        if len(sys.argv) < 2:
+            print("No text file for text adventure :'(")
+            print("Please enter a file.")
+            exit(1)
 
-    filename = sys.argv[1]
-    start = 'Intro'
+        filename = sys.argv[1]
+        start = 'Intro'
 
-    t = TextAdventure(filename, start)
-    t.load_properties()
-    t.get_global_var()
-    print()
-    #print(t.get_choice(start))
-    t.loop()
+        t = TextAdventure(filename, start)
+        t.load_properties()
+        t.get_global_var()
+        print()
+        #print(t.get_choice(start))
+        t.loop()
+    except KeyboardInterrupt:
+        print('\r\r\nBye ! :)')
