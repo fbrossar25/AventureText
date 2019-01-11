@@ -1,0 +1,45 @@
+{
+	"description": {
+		"foo": {
+			"text": "bonjour"
+		},
+		"bar": {
+			"text": "foo"
+		},
+		"win": {
+			"text": "YOU WIN !!! :)"
+		},
+		"end": {
+			"text": "YOU DIED !!! :("
+		}
+	},
+
+	"choix": {
+		"foo": [
+			{
+				"text": "Aller à la porte gauche.",
+				"next": "porte_1"
+			},
+			{
+				"text": "kill",
+				"next": "end"
+			}
+		],
+
+
+		"bar": [
+			{
+				"text": "kill !",
+				"next": "end"
+			},
+			{
+				"text": "treasure !",
+				"next": "win"
+			},
+			{
+				"text": "foo",
+				"next": "foo"
+			}
+		]
+	}
+}
