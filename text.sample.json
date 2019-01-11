@@ -1,4 +1,9 @@
 {
+	"variables": {
+		"clef": false,
+		"mecanisme": false,
+		"nomJoueur": ""
+	},
 	"description": {
 		"Intro": {
 			"text": "Vous vous réveillez dans une pièce relativement sombre, les battements de coeurs\nassourdissants résonnent dans vos tympans. A cela s’ajoute un mal de crâne."
@@ -6,25 +11,57 @@
 		"scene1": {
 			"text": "La pièce dans laquelle vous êtes est baignée dans l’obscurité, que faites vous ?"
 		},
+		"scene1_retour": {
+			"text": "Vous vous retrouvez au centre de la pièce, que faire"
+		},
 		"scene1_avancer": {
 			"text": "Vous vous retrouvez face à une porte en bois, avec des renforts en métaux. une petite grille\nest encastré dans la porte au niveau de votre tête, que faites vous ?"
 		},
 		"scene1_droite": {
 			"text": "Vous parvenez à deviner un petit placard fixé sur le mur droit de la pièce, que faire ?\n"
 		},
+		"scene1_droite_observer": {
+			"text": "Le placard est abîmé par l’humidité de la pièce, les coins sont rongés et s'effrite rien qu’en y\npassant le doigt.\nIl possède des aspérités qui rend la texture du bois rugueuse et désagréable.\nLa face avant du placard est composée deux portes battantes avec des gonds métalliques\nétonnamment bien conservés et des poignées rouillées.\nEn bref, c’est un placard..."
+		},
+		"scene1_droite_ouvrir": {
+			"text": "Vous ouvrez les lourdes portes du placard dans un grincement à vous hérisser les poils.\nLe placard semble vide, que faire ?"
+		},
+		"scene1_droite_inspecter": {
+			"text": "Le placard est abimé, et en passant les mains sur les différentes paroies intérieur, vous\ndécelez une planche bancale, amovible. Vous tentez de la retirez, ce qui déclenche un\nmécanisme dans un bourdonnement et des cliquetis métalliques. Cela a probablement\nactivé quelque chose, que faire ?"
+		},
 		"scene1_gauche_mecanisme":{
-			"text": "Vous vous retrouvez face à un mur en pierre, des gouttes d’eau perlent ça et là à cause de\nl’humidité ambiante. Vous observez un détail étrange. Que faire ?",
+			"text": "Vous vous retrouvez face à un mur en pierre, des gouttes d’eau perlent ça et là à cause de\nl’humidité ambiante. Vous observez un détail étrange. Que faire ?"
 		},
 		"scene1_gauche": {
 			"text": "Vous vous retrouvez face à un mur en pierre, des gouttes d’eau perlent ça et là à cause de\nl’humidité ambiante. Que faire ?"
+		},
+		"scene1_gauche_inspecter": {
+			"text": "L’humidité de la pièce a permis l’apparition de mousse sur la roche, l’eau en abondance permet à ce costume mousseux de se répandre avec aisance.\nLa mousse est un plante capable de se développer sur toutes les surfaces à partir du\nmoment ou les aspérités lui permettent de se loger. Elle se nourrit majoritairement des\nminéraux véhiculés par l’eau et adore les milieux possédant un fort taux d’humidité.\nVous ne vous souvenez plus du reste de la définition wikipédia. Que faire ?"
+		},
+		"scene1_gauche_inspecter_mecanisme": {
+			"text": "Parmis les pierres et la mousse, vous décelez une ouverture qui n’était pas présente auparavant. Dans cette cache, vous trouvez une clef, que faire ?"
+		},
+		"scene1_dancefloor": {
+			"text": "Vous dansez pendant un petit moment, en levant les bras, en gigotant votre arrière train.\nVous êtes heureux, vous décidez de rejoindre le centre de la pièce une fois l’excitation\nretombée."
+		},
+		"scene2_ouvrir": {
+			"text": "Vous tentez d’actionner la poignée, la porte reste immobile, il vous faut une clef."
+		},
+		"scene2_ouvrir_clef": {
+			"text": "Vous insérez la clef et tentez d’ouvrir la porte. La porte s’ouvre."
+		},
+		"scene2_grille": {
+			"text": "En vous rapprochant de la grille vous pouvez observer ce qui se trouve de l’autre côtés de\nla porte. Un long couloir par vers la gauche et vers la droite, d’autres pièces similaires\nsemblent se trouver en face et aux côtés de la votre. Vous n’entendez pas un bruit dans le\ncouloir. Que faire ?"
+		},
+		"victoire": {
+			"text": "Félicitations, merci d'avoir joué."
 		}
-
 	},
 	"choix": {
 		"Intro": [
 			{
 				"text": "[saisir votre nom]",
-				"next": "porte_1",
+				"next": "scene1",
 				"input": "nomJoueur"
 			}
 		],
@@ -44,9 +81,156 @@
 					"true": "scene1_gauche_mecanisme",
 					"false": "scene1_gauche"
 				}
+			}
+		],
+		"scene1_retour": [
+			{
+				"text": "Avancer",
+				"next": "scene1_avancer"
 			},
 			{
+				"text": "Aller sur la droite",
+				"next": "scene1_droite"
+			},
+			{
+				"text": "Aller sur la gauche",
+				"require": {
+					"name": "mecanisme",
+					"true": "scene1_gauche_mecanisme",
+					"false": "scene1_gauche"
+				}
+			}
+		],
+		"scene1_avancer": [
+			{
+				"text": "Ouvrir la porte",
+				"require": {
+					"name": "clef",
+					"true": "scene2_ouvrir_clef",
+					"false": "scene2_ouvrir"
+				}
+			},
+			{
+				"text": "Observer par la petite grille",
+				"next": "scene2_grille"
+			},
+			{
+				"text": "Faire demi-tour",
+				"next": "scene1_retour"
+			}
+		],
+		"scene1_gauche": [
+			{
+				"text": "Inspecter le mur.",
+				"next": "scene1_gauche_inspecter"
+			},
+			{
+				"text": "Faire demi-tour.",
+				"next": "scene1_retour"
+			}
+		],
+		"scene1_gauche_mecanisme": [
+			{
+				"text": "Inspecter le mur.",
+				"next": "scene1_gauche_inspecter_mecanisme",
+				"define": {
+					"clef": true
+				}
+			},
+			{
+				"text": "Faire demi-tour.",
+				"next": "scene1_retour"
+			}
+		],
+		"scene1_gauche_inspecter": [
+			{
+				"text": "Inspecter le mur.",
+				"next": "scene1_gauche_inspecter"
+			},
+			{
+				"text": "Retourner au centre de la piece",
+				"next": "scene1_retour"
+			}
+		],
+		"scene1_gauche_inspecter_mecanisme": [
+			{
+				"text": "Retourner au centre de la piece",
+				"next": "scene1_retour"
+			},
+			{
+				"text": "Faire une danse de victoire, il en faut peu pour être heureux.",
+				"next": "scene1_dancefloor"
+			}
+		],
+		"scene1_droite_observer": [
+			{
+				"text": "Ouvrir le placard",
+				"next": "scene1_droite_ouvrir"
+			},
+			{
+				"text": "Faire demi-tour.",
+				"next": "scene1_retour"
+			}
+		],
+		"scene1_droite_ouvrir": [
+			{
+				"text": "Inspecter le placard",
+				"next": "scene1_droite_inspecter",
+				"define": {
+					"mecanisme": true
+				}
+			},
+			{
+				"text": "Retourner au centre de la piece",
+				"next": "scene1_retour"
+			}
+		],
+		"scene1_droite_inspecter": [
+			{
+				"text": "Retourner au centre de la piece",
+				"next": "scene1_retour"
+			},
+			{
+				"text": "Faire une danse de victoire, il en faut peu pour être heureux.",
+				"next": "scene1_dancefloor"
+			}
+		],
+		"scene1_droite": [
+			{
+				"text": "Observer le placard.",
+				"next": "scene1_droite_observer"
+			},
+			{
+				"text": "Ouvrir le placard",
+				"next": "scene1_droite_ouvrir"
+			},
+			{
+				"text": "Faire demi-tour.",
+				"next": "scene1_retour"
+			}
 
+		],
+		"scene2_grille": [
+			{
+				"text": "Faire demi-tour",
+				"next": "scene1_avancer"
+			}
+		],
+		"scene2_ouvrir": [
+			{
+				"text": "Faire demi-tour",
+				"next": "scene1_retour"
+			}
+		],
+		"scene2_ouvrir_clef": [
+			{
+				"text": "Vous vous êtes échappé",
+				"next": "victoire"
+			}
+		],
+		"scene1_dancefloor": [
+			{
+				"next": "scene1_retour"
 			}
 		]
 	}
