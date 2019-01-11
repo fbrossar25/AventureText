@@ -24,6 +24,10 @@ class TextAdventure:
             print('IOERROR - {}'.format(str(e)))
             exit(1)
 
+    def get_global_var(self):
+        for key, value in self.ppt['variables'].items():
+            self.global_var[key] = value
+
     def print_choice(self, name: str) -> bool:
         choices = self.ppt['choix'][name]
 
@@ -37,9 +41,7 @@ class TextAdventure:
 
         n = 1
         print(self.ppt['description'][name]['text'])
-        print(choices)
         for choice in choices:
-            print(choice)
             print('   {n} - {text}'.format(
                 n=n,
                 text=choice['text'].format(**self.user_input)
@@ -54,7 +56,7 @@ class TextAdventure:
                 print('Quel est votre choix ?')
                 try:
                     choice = int(input(' > '))
-                    if choice <= 0 or choice > len(self.ppt['choix']):
+                    if choice <= 0 or choice > len(self.ppt['choix'][name]):
                         continue
                     else:
                         break
@@ -64,11 +66,25 @@ class TextAdventure:
         else:
             choice = 1
 
-        return self.ppt['choix'][name][choice-1]['next']
+        return self.next_choice(name, choice-1)
+
+    def next_choice(self, name: str, n: int) -> str:
+        choice = self.ppt['choix'][name][n]
+        if 'require' in choice:
+            print(choice["require"])
+            if self.global_var[choice["require"]["name"]]:
+                return choice["require"]["true"]
+            else:
+                return choice["require"]["false"]
+
+        else:
+            return choice['next']
+
 
     def loop(self):
         choice = self.start
         while True:
+            print()
             choice = self.get_choice(choice)
 
 
@@ -85,7 +101,7 @@ if __name__ == '__main__':
 
     t = TextAdventure(filename, start)
     t.load_properties()
-
+    t.get_global_var()
     print()
     #print(t.get_choice(start))
     t.loop()
