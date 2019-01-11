@@ -11,6 +11,7 @@ class TextAdventure:
     def __init__(self, filename: str, start: str):
         self.filename = filename
         self.ppt = self.load_properties()
+        self.user_input = {}
 
     def load_properties(self) -> Any:
         try:
@@ -21,7 +22,23 @@ class TextAdventure:
             print('IOERROR - {}'.format(str(e)))
             exit(1)
 
-    
+    def print_choice(self, name: str):
+        print(self.ppt['description'][name]['text'])
+        choices = self.ppt['choix'][name]
+
+        if len(choices) == 1 and ('input' in choices[0]):
+            result = input(' > ')
+            print(result)
+        n = 1
+        for choice in choices:
+            print('   {n} - {text}'.format(
+                n=n,
+                text=choice['text']
+            ))
+            n += 1
+
+    def get_choice(self):
+        pass
 
 
 
@@ -33,9 +50,11 @@ if __name__ == '__main__':
         exit(1)
 
     filename = sys.argv[1]
-    #start = 'Intro'
-    start = "foo"
+    start = 'Intro'
 
     t = TextAdventure(filename, start)
-    t.load_properties(  
-    print(json.dumps(t.ppt, indent=2))
+    t.load_properties()
+
+    print()
+    t.print_choice(start)
+
