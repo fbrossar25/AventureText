@@ -57,6 +57,16 @@
 		}
 	},
 	"choix": {
+		"hello": [
+			{
+				"text": "ok",
+				"define": {
+					"hello": true
+				},
+				"next": "hello"
+			}
+		],
+
 		"Intro": [
 			{
 				"text": "[saisir votre nom]",

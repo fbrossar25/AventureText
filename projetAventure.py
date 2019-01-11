@@ -25,7 +25,7 @@ class TextAdventure:
             print('IOERROR - {}'.format(str(e)))
             exit(1)
 
-    def get_global_var(self):
+    def get_global_var(self) -> None:
         for key, value in self.ppt['variables'].items():
             self.global_var[key] = value
 
@@ -101,19 +101,14 @@ class TextAdventure:
 
     def trigger_win(self):
         print()
-        print(self.ppt['description']['victoire']['text'])
+        print(self.ppt['description']['victoire']['text'].format(**self.user_input))
 
 
 
 
 if __name__ == '__main__':
     try:
-        if len(sys.argv) < 2:
-            print("No text file for text adventure :'(")
-            print("Please enter a file.")
-            exit(1)
-
-        filename = sys.argv[1]
+        filename = 'text.json'
         start = 'Intro'
 
         t = TextAdventure(filename, start)
